@@ -1,6 +1,8 @@
 type Query {
     users: [User!]! @paginate
     user(id: ID @eq): User @find
+
+    posts: [Post!]! @all
 }
 
 type Mutation {
@@ -21,4 +23,11 @@ type User {
     name: String
     email: String
     email_verified_at: String
+}
+
+type Post {
+    id: ID
+    title: String
+    content: String
+    author: User! @belongsTo
 }
