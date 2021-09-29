@@ -7,7 +7,11 @@ type Query {
 }
 
 type Mutation {
-    createUser(name: String!, email: String!, password: String!): User! @create
+    createUser(
+        name: String!
+        email: String! @rules(apply: ["email", "unique:users"])
+        password: String! @rules(apply: ["min:8"])
+    ): User! @create
 
     updateUser(id: ID!, name: String, email: String): User! @update
     deleteUser(id: ID!): User @delete
